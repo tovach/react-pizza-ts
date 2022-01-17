@@ -1,0 +1,17 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background: #F7F7F7;
+    top: 0;
+  }
+
+
+}
