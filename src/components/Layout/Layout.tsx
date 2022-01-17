@@ -1,11 +1,14 @@
 import React, {FC} from 'react';
 import {Outlet} from "react-router-dom";
+import Logo from "../Logo/Logo";
 
 
 const Layout: FC = () => {
     return (
         <>
-            <header>header</header>
+            <header>
+                <Logo/>
+            </header>
             <main>
                 <Outlet/>
             </main>
