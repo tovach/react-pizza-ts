@@ -1,18 +1,19 @@
 import React, {FC} from 'react';
 import {Outlet} from "react-router-dom";
-import Logo from "../Logo/Logo";
+
+import style from './Layout.module.scss'
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 
 const Layout: FC = () => {
     return (
         <>
-            <header>
-                <Logo/>
-            </header>
+            <Header/>
             <main>
                 <Outlet/>
             </main>
-            <footer>footer</footer>
+            <Footer/>
         </>
     );
 };
