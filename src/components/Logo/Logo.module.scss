@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.heading {
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.subHeading {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #7B7B7B;
+}
