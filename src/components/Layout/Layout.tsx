@@ -1,18 +1,17 @@
 import React, {FC} from 'react';
 import {Outlet} from "react-router-dom";
-
-import style from './Layout.module.scss'
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Main from "../Main/Main";
 
 
 const Layout: FC = () => {
     return (
         <>
             <Header/>
-            <main>
+            <Main>
                 <Outlet/>
-            </main>
+            </Main>
             <Footer/>
         </>
     );
