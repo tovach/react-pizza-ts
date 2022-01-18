@@ -6,18 +6,17 @@ import styles from './Button.module.scss';
 interface ButtonProps extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     variant: "primary" | "secondary",
     children: JSX.Element[] | JSX.Element | string;
-    active?: boolean;
+    active?: boolean
 }
 
-const Button: FC<ButtonProps> = ({variant, children, active = false, onClick}) => {
-    const [current, setCurrent] = useState<boolean>(false);
+const Button: FC<ButtonProps> = ({variant, children, active= false}) => {
 
 
     return (
-        <button onClick={()=> setCurrent(true)} className={cn(styles.button, {
+        <button className={cn(styles.button, {
             [styles.primary]: variant === "primary",
             [styles.secondary]: variant === "secondary",
-            [styles.secondaryAcive]: current,
+            [styles.secondary && styles.secondaryAcive]: variant === "secondary" && active,
         })}>
             {children}
         </button>
