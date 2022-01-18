@@ -8,17 +8,17 @@ import TabsPreloader from "./TabsPreloader";
 
 const Tabs = () => {
     const url = 'https://my-json-server.typicode.com/tovach/react-pizza-jsonserver/categories';
-
-    const [categories, setCategories] = useState<string[]>();
     const {response, error, loading} = useAxios<string[]>(url);
 
+    const [categories, setCategories] = useState<string[]>();
+    const [active, setActive] = useState('мясная');
 
-
-    console.log('Tabs render')
 
     useEffect(() => {
         setCategories(response)
     }, [response])
+
+
     return (
         <section>
             <ul className={styles.list}>
@@ -26,8 +26,10 @@ const Tabs = () => {
                     !loading
                         ? categories?.map(
                             (el, index) =>
-                                <li key={index}>
-                                    <Button variant={"secondary"}>{el}</Button>
+                                <li onClick={(e) => {
+                                    setActive(el)
+                                }} key={index}>
+                                    <Button variant={"secondary"} active={el === active}>{el}</Button>
                                 </li>)
                         : Array(6)
                             .fill(0)
