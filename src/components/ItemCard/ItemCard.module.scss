@@ -1,0 +1,109 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 300px;
+  height: 605px;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    transition: all linear 0.3s;
+  }
+}
+
+.header {
+  max-width: 280px;
+
+
+  img {
+    width: 100%;
+
+
+  }
+}
+
+.main {
+
+  h3 {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #7B7B7B;
+  }
+}
+
+.controls {
+  padding: 7px;
+  background: #F3F3F3;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list {
+  display: flex;
+  gap: 5px;
+}
+
+.item {
+  width: 100%;
+
+}
+
+.button {
+  padding: 8px 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  background: rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    @extend .buttonActive
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.buttonActive {
+  background: var(--white);
+
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  h5 {
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: 0.015em;
+  }
+}
+
+.footerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
