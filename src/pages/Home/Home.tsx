@@ -3,6 +3,7 @@ import Tabs from "../../components/Tabs/Tabs";
 import Sort from "../../components/Sort/Sort";
 
 import styles from './Home.module.scss'
+import Goods from "../../components/Goods/Goods";
 
 const Home = () => {
 
@@ -13,6 +14,9 @@ const Home = () => {
                 <Tabs/>
                 <Sort/>
             </section>
+
+            <Goods/>
+
         </>
     );
 };
