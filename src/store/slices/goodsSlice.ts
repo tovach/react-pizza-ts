@@ -10,7 +10,7 @@ interface goodsSliceState {
 const initialState: goodsSliceState = {
     items: [],
     category: '',
-    sortBy: {} as SortOption,
+    sortBy: {name: 'популярности', value: 'rating', order: 'desc'},
 }
 
 const goodsSlice = createSlice({
