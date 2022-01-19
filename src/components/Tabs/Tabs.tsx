@@ -4,6 +4,8 @@ import {useAxios} from "../../hooks/axios";
 import styles from './Tabs.module.scss'
 import Button from "../UI/Button/Button";
 import TabsPreloader from "./TabsPreloader";
+import {useAppDispatch} from "../../hooks/redux";
+import {setCategory} from "../../store/slices/goodsSlice";
 
 
 const Tabs: FC = () => {
@@ -11,7 +13,9 @@ const Tabs: FC = () => {
     const {response, error, loading} = useAxios<string[]>(url);
 
     const [categories, setCategories] = useState<string[]>();
-    const [active, setActive] = useState('');
+    const [current, setcurrent] = useState('');
+
+    const dispatch = useAppDispatch();
 
 
     useEffect(() => {
@@ -19,16 +23,18 @@ const Tabs: FC = () => {
     }, [response])
 
     const onChoice = (el: string) => {
-        setActive(el)
+        setcurrent(el)
     }
 
-    //TODO: Here useEffect with axios deps[active]
+    useEffect(() => {
+        dispatch(setCategory(current));
+    }, [current])
 
     return (
         <section>
             <ul className={styles.list}>
                 <li onClick={() => onChoice('')}>
-                    <Button variant={"secondary"} active={'' === active}>Все</Button>
+                    <Button variant={"secondary"} active={'' === current}>Все</Button>
                 </li>
                 {
                     !loading
@@ -36,7 +42,7 @@ const Tabs: FC = () => {
                         categories?.map(
                             (el, index) =>
                                 <li onClick={() => onChoice(el)} key={index}>
-                                    <Button variant={"secondary"} active={el === active}>{el}</Button>
+                                    <Button variant={"secondary"} active={el === current}>{el}</Button>
                                 </li>)
                         : Array(6)
                             .fill(0)
