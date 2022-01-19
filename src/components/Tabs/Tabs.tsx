@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useAxios} from "../../hooks/axios";
 
 import styles from './Tabs.module.scss'
@@ -6,29 +6,36 @@ import Button from "../UI/Button/Button";
 import TabsPreloader from "./TabsPreloader";
 
 
-const Tabs = () => {
+const Tabs: FC = () => {
     const url = 'https://my-json-server.typicode.com/tovach/react-pizza-jsonserver/categories';
     const {response, error, loading} = useAxios<string[]>(url);
 
     const [categories, setCategories] = useState<string[]>();
-    const [active, setActive] = useState('мясная');
+    const [active, setActive] = useState('');
 
 
     useEffect(() => {
         setCategories(response)
     }, [response])
 
+    const onChoice = (el: string) => {
+        setActive(el)
+    }
+
+    //TODO: Here useEffect with axios deps[active]
 
     return (
         <section>
             <ul className={styles.list}>
+                <li onClick={() => onChoice('')}>
+                    <Button variant={"secondary"} active={'' === active}>Все</Button>
+                </li>
                 {
                     !loading
-                        ? categories?.map(
+                        ?
+                        categories?.map(
                             (el, index) =>
-                                <li onClick={(e) => {
-                                    setActive(el)
-                                }} key={index}>
+                                <li onClick={() => onChoice(el)} key={index}>
                                     <Button variant={"secondary"} active={el === active}>{el}</Button>
                                 </li>)
                         : Array(6)
