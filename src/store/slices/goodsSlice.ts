@@ -2,13 +2,13 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PizzaItem, SortOption} from "../../types/interfaces";
 
 interface goodsSliceState {
-    item: PizzaItem[];
+    items: PizzaItem[];
     category: string;
     sortBy: SortOption;
 }
 
 const initialState: goodsSliceState = {
-    item: [],
+    items: [],
     category: '',
     sortBy: {} as SortOption,
 }
@@ -18,14 +18,17 @@ const goodsSlice = createSlice({
     initialState,
 
     reducers: {
-        setCategory(state, action:PayloadAction<string>) {
+        setCategory(state, action: PayloadAction<string>) {
             state.category = action.payload
         },
-        setSort(state, action:PayloadAction<SortOption>) {
+        setSort(state, action: PayloadAction<SortOption>) {
             state.sortBy = action.payload
         },
+        addItems(state, action: PayloadAction<PizzaItem[]>) {
+            state.items = action.payload;
+        }
     }
 })
 
-export const {setSort, setCategory} = goodsSlice.actions;
+export const {setSort, setCategory, addItems} = goodsSlice.actions;
 export default goodsSlice.reducer;
