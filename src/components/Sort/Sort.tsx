@@ -13,7 +13,7 @@ const Sort: FC = () => {
     const sortVariants: SortOption[] = [
         {name: 'популярности', value: 'rating', order: 'desc'},
         {name: 'цене', value: 'price', order: 'desc'},
-        {name: 'названию', value: 'title', order: 'desc'}
+        {name: 'названию', value: 'title', order: 'asc'}
     ];
 
     const [visible, setVisible] = useState(false);
