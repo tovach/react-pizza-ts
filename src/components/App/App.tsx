@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
 import Layout from "../Layout/Layout";
-import Home from "../../pages/Home";
+import Home from "../../pages/Home/Home";
 import Checkout from "../../pages/Checkout";
 import styles from './App.module.scss'
 
