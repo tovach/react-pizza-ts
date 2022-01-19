@@ -9,9 +9,8 @@ import {setCategory} from "../../store/slices/goodsSlice";
 
 
 const Tabs: FC = () => {
-    const url = 'https://my-json-server.typicode.com/tovach/react-pizza-jsonserver/categories';
+    const url = '/categories';
     const {response, error, loading} = useAxios<string[]>(url);
-
     const [categories, setCategories] = useState<string[]>();
     const [current, setcurrent] = useState('');
 
@@ -44,9 +43,7 @@ const Tabs: FC = () => {
                                 <li onClick={() => onChoice(el)} key={index}>
                                     <Button variant={"secondary"} active={el === current}>{el}</Button>
                                 </li>)
-                        : Array(6)
-                            .fill(0)
-                            .map((el, index) => <TabsPreloader key={index}/>)
+                        : <TabsPreloader quantity={5}/>
                 }
             </ul>
         </section>
