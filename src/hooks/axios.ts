@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios, {AxiosError} from "axios";
 
+axios.defaults.baseURL = 'https://my-json-server.typicode.com/tovach/react-pizza-jsonserver/';
 
 const useAxios = <T>(url: string) => {
     const [response, setResponse] = useState<T>();
