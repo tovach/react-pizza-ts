@@ -1,15 +1,31 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {PizzaItem} from "../../types/interfaces";
+import Button from "../UI/Button/Button";
+import {ReactComponent as PlusIcon} from "./img/plus-icon.svg";
+
+
+import {useAppDispatch} from "../../hooks/redux";
+import {addToCart} from "../../store/slices/cartSlice";
+import QuantityCounter from "./QuantityCounter";
+import cn from "classnames";
 
 import styles from './ItemCard.module.scss'
-import Button from "../UI/Button/Button";
-
 
 interface ItemCardProps {
     item: PizzaItem
 }
 
-const ItemCard:FC<ItemCardProps> = ({item}) => {
+const ItemCard: FC<ItemCardProps> = ({item}) => {
+
+    const [dough, setDough] = useState(item.dough[0].value);
+    const [size, setSize] = useState(item.size[0].value);
+
+    const dispatch = useAppDispatch();
+    const onItemAdd = (item: PizzaItem) => {
+        dispatch(addToCart({...item, size, dough, quantity: 1,}));
+    };
+
+
     return (
         <article className={styles.wrapper}>
             <header className={styles.header}>
@@ -26,7 +42,10 @@ const ItemCard:FC<ItemCardProps> = ({item}) => {
                     <ul className={styles.list}>
                         {item.dough.map(el =>
                             <li className={styles.item} key={el.value}>
-                                <button disabled={!el.availability} className={styles.button}>{el.value}</button>
+                                <button onClick={() => setDough(el.value)} disabled={!el.availability}
+                                        className={cn(styles.button, {
+                                            [styles.buttonActive]: el.value === dough
+                                        })}>{el.value}</button>
                             </li>
                         )}
                     </ul>
@@ -34,7 +53,10 @@ const ItemCard:FC<ItemCardProps> = ({item}) => {
                     <ul className={styles.list}>
                         {item.size.map(el =>
                             <li className={styles.item} key={el.value}>
-                                <button disabled={!el.availability} className={styles.button}>{el.value}</button>
+                                <button onClick={() => setSize(el.value)} disabled={!el.availability}
+                                        className={cn(styles.button, {
+                                            [styles.buttonActive]: el.value === size
+                                        })}>{el.value}</button>
                             </li>
                         )}
                     </ul>
@@ -42,7 +64,9 @@ const ItemCard:FC<ItemCardProps> = ({item}) => {
 
                 <div className={styles.footerWrapper}>
                     <h5>от {item.price} ₽</h5>
-                    <Button variant={"primary"}>Добавить</Button>
+                    <Button onClick={() => onItemAdd(item)} variant={"primary"}>
+                        <PlusIcon/>Добавить<QuantityCounter itemId={item.id}/>
+                    </Button>
                 </div>
 
             </footer>
