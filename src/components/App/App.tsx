@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
 import Layout from "../Layout/Layout";
 import Home from "../../pages/Home/Home";
-import Checkout from "../../pages/Checkout";
+import Cart from "../../pages/Cart/Cart";
 import styles from './App.module.scss'
 
 const App: FC = () => {
@@ -11,7 +11,7 @@ const App: FC = () => {
             <Routes>
                 <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}/>
-                    <Route path={'/checkout'} element={<Checkout/>}/>
+                    <Route path={'/cart'} element={<Cart/>}/>
                 </Route>
             </Routes>
         </div>
