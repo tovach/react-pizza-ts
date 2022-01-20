@@ -26,5 +26,11 @@ interface Size {
     availability: boolean;
 }
 
+export interface PizzaItemCart extends Omit<PizzaItem, 'dough'|'size'> {
+    quantity: number;
+    dough: string;
+    size: string;
+}
+
 
 
