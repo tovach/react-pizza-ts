@@ -1,0 +1,22 @@
+.wrapper{
+
+}
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+}
+.item{
+  position: relative;
+  padding-top: 30px;
+
+  &:before{
+    position: absolute;
+    top: 0;
+    content: '';
+    height: 1px;
+    width: 100%;
+    background: #F4F4F4;
+  }
+}
