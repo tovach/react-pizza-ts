@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './Main.module.scss';
 
 interface MainProps {
-    children: JSX.Element[] | JSX.Element;
+    children: JSX.Element;
 }
 
 const Main:FC<MainProps> = ({children}) => {
