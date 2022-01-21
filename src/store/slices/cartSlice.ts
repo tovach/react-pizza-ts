@@ -13,28 +13,79 @@ const initialState: cartSliceState = {
     totalQuantity: 0,
 }
 
+
+const getTotalPrice = (arr: PizzaItemCart[]) => arr.reduce((sum, el) => sum + el.price * el.quantity, 0)
+const getTotalQuantity = (arr: PizzaItemCart[]) => arr.reduce((sum, el) => sum + el.quantity, 0)
+
 const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
         addToCart(state, action: PayloadAction<PizzaItemCart>) {
             const isExistIndex = state.items.findIndex(
-                (item) => item.id === action.payload.id
+                (item) => (item.dough === action.payload.dough) && (item.size === action.payload.size) && (item.title === action.payload.title)
             );
-            if (isExistIndex >= 0) {
+            if (isExistIndex >= 0 && state.items[isExistIndex].quantity < 10) {
                 state.items[isExistIndex] = {
                     ...state.items[isExistIndex],
                     quantity: state.items[isExistIndex].quantity + 1,
+
                 }
-            } else {
-                state.items.push(action.payload)
+                state.totalPrice = getTotalPrice(state.items);
+                state.totalQuantity = getTotalQuantity(state.items);
+            } else if (isExistIndex < 0) {
+                state.items.push({...action.payload, id: Date.now()});
+                state.totalPrice = getTotalPrice(state.items);
+                state.totalQuantity = getTotalQuantity(state.items);
             }
         },
         removeFromCart(state, action: PayloadAction<PizzaItemCart>) {
-            state.items.filter(el => el.id !== action.payload.id)
+            state.items = state.items.filter(el => el.id !== action.payload.id);
+            state.totalPrice = getTotalPrice(state.items);
+            state.totalQuantity = getTotalQuantity(state.items);
+        },
+
+        increaseItem(state, action) {
+            const isExistIndex = state.items.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (isExistIndex >= 0 && state.items[isExistIndex].quantity < 10) {
+                state.items[isExistIndex] = {
+                    ...state.items[isExistIndex],
+                    quantity: state.items[isExistIndex].quantity + 1,
+
+                }
+                state.totalPrice = getTotalPrice(state.items);
+                state.totalQuantity = getTotalQuantity(state.items);
+            } else {
+                return
+            }
+        },
+        decreaseItem(state, action) {
+            const isExistIndex = state.items.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (isExistIndex >= 0 && state.items[isExistIndex].quantity > 1) {
+                state.items[isExistIndex] = {
+                    ...state.items[isExistIndex],
+                    quantity: state.items[isExistIndex].quantity - 1,
+                }
+                state.totalPrice = getTotalPrice(state.items);
+                state.totalQuantity = getTotalQuantity(state.items);
+            } else {
+                return
+            }
+        },
+
+        cleanOut(state) {
+            state.items = [];
+            state.totalPrice = getTotalPrice(state.items);
+            state.totalQuantity = getTotalQuantity(state.items);
         }
+
+
     }
 })
 
-export const {addToCart} = cartSlice.actions;
+export const {addToCart, removeFromCart, increaseItem, decreaseItem, cleanOut} = cartSlice.actions;
 export default cartSlice.reducer;

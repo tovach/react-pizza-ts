@@ -6,7 +6,6 @@ import {ReactComponent as PlusIcon} from "./img/plus-icon.svg";
 
 import {useAppDispatch} from "../../hooks/redux";
 import {addToCart} from "../../store/slices/cartSlice";
-import QuantityCounter from "./QuantityCounter";
 import cn from "classnames";
 
 import styles from './ItemCard.module.scss'
@@ -21,6 +20,7 @@ const ItemCard: FC<ItemCardProps> = ({item}) => {
     const [size, setSize] = useState(item.size[0].value);
 
     const dispatch = useAppDispatch();
+
     const onItemAdd = (item: PizzaItem) => {
         dispatch(addToCart({...item, size, dough, quantity: 1,}));
     };
@@ -65,7 +65,7 @@ const ItemCard: FC<ItemCardProps> = ({item}) => {
                 <div className={styles.footerWrapper}>
                     <h5>от {item.price} ₽</h5>
                     <Button onClick={() => onItemAdd(item)} variant={"primary"}>
-                        <PlusIcon/>Добавить<QuantityCounter itemId={item.id}/>
+                        <PlusIcon/>Добавить
                     </Button>
                 </div>
 

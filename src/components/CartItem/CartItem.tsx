@@ -6,12 +6,15 @@ import {ReactComponent as MinusIcon} from "./img/minus-icon.svg";
 import {ReactComponent as RemoveIcon} from "./img/remove-icon.svg";
 
 import styles from './CartItem.module.scss';
+import {useAppDispatch} from "../../hooks/redux";
+import {decreaseItem, increaseItem, removeFromCart} from "../../store/slices/cartSlice";
 
 interface CartItemProps {
     item: PizzaItemCart
 }
 
 const CartItem: FC<CartItemProps> = ({item}) => {
+    const dispatch = useAppDispatch();
     return (
         <article className={styles.wrapper}>
 
@@ -29,16 +32,16 @@ const CartItem: FC<CartItemProps> = ({item}) => {
             <div className={styles.right}>
 
                 <div className={styles.controls}>
-                    <button className={styles.button}><PlusIcon/></button>
+                    <button onClick={() => dispatch(increaseItem(item))} className={styles.button}><PlusIcon/></button>
                     <span>{item.quantity}</span>
-                    <button className={styles.button}><MinusIcon/></button>
+                    <button onClick={() => dispatch(decreaseItem(item))} className={styles.button}><MinusIcon/></button>
                 </div>
 
                 <div className={styles.price}>
                     <h3>{item.quantity * item.price}</h3>
                 </div>
 
-                <div className={styles.remove}>
+                <div onClick={() => dispatch(removeFromCart(item))} className={styles.remove}>
                     <button className={styles.button}><RemoveIcon/></button>
                 </div>
             </div>
