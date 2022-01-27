@@ -2,20 +2,22 @@
   height: 80px;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-between;
   align-items: center;
 }
 
 .left {
-  width: 400px;
+  width: 360px;
   display: flex;
-  gap: 30px;
+  gap: 5px;
   align-items: center;
 
 }
 
 .right {
-  width: 380px;
+  width: 340px;
   display: flex;
   justify-content: space-between;
   align-items: center;

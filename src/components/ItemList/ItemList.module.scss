@@ -3,4 +3,8 @@
   flex-wrap: wrap;
   gap: 50px 10px;
   align-items: center;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
 }

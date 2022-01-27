@@ -1,9 +1,26 @@
-.wrapper {}
+.wrapper {
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+
+  @media (max-width: 640px) {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
-.itemActive{
-  background: red;
+
+.listItem {
+
+
+
+  @media (max-width: 640px) {
+    button {
+      justify-content: center;
+      width: 100%;
+    }
+  }
 }

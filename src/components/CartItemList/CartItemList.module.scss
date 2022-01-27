@@ -10,11 +10,11 @@
 }
 .item{
   position: relative;
-  padding-top: 30px;
+  padding-bottom: 60px;
 
-  &:before{
+  &:after{
     position: absolute;
-    top: 0;
+    bottom: 0;
     content: '';
     height: 1px;
     width: 100%;

@@ -30,9 +30,8 @@ const Tabs: FC = () => {
     }, [current])
 
     return (
-        <section>
             <ul className={styles.list}>
-                <li onClick={() => onChoice('')}>
+                <li className={styles.listItem} onClick={() => onChoice('')}>
                     <Button variant={"secondary"} active={'' === current}>Все</Button>
                 </li>
                 {
@@ -40,13 +39,12 @@ const Tabs: FC = () => {
                         ?
                         categories?.map(
                             (el, index) =>
-                                <li onClick={() => onChoice(el)} key={index}>
+                                <li className={styles.listItem} onClick={() => onChoice(el)} key={index}>
                                     <Button variant={"secondary"} active={el === current}>{el}</Button>
                                 </li>)
                         : <TabsPreloader quantity={5}/>
                 }
             </ul>
-        </section>
     );
 };
 

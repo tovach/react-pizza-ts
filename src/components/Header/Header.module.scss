@@ -1,9 +1,14 @@
 .wrapper {
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: 40px 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 40px;
+  background: var(--white);
+  z-index: 100;
+
 
   &:after {
     content: '';
@@ -14,5 +19,11 @@
     bottom: 0;
   }
 
+  @media (max-width: 640px) {
 
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
 }
