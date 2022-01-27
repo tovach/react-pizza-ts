@@ -9,14 +9,10 @@ import {useGetGoodsQuery} from "../../store/api/goods.api";
 
 
 const Goods: FC = () => {
-
     const {sortBy} = useAppSelector(state => state.goods);
     const {category} = useAppSelector(state => state.goods);
-
     const goods = useAppSelector(state => state.goods.items);
-
     const dispatch = useAppDispatch();
-
     const {data, isLoading} = useGetGoodsQuery({category, sortBy});
 
 

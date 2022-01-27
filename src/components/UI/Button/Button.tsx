@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({variant, children, active= false, onClick}) =>
             [styles.primary]: variant === "primary",
             [styles.primary && styles.primaryActive]: variant === "primary" && active,
             [styles.secondary]: variant === "secondary",
-            [styles.secondary && styles.secondaryAcive]: variant === "secondary" && active,
+            [styles.secondary && styles.secondaryActive]: variant === "secondary" && active,
         })}>
             {children}
         </button>

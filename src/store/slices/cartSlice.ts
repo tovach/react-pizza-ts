@@ -8,7 +8,9 @@ interface cartSliceState {
 }
 
 const initialState: cartSliceState = {
-    items: [],
+    items: localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem('cartItems')!)
+        : [],
     totalPrice: 0,
     totalQuantity: 0,
 }
@@ -38,11 +40,13 @@ const cartSlice = createSlice({
                 state.totalPrice = getTotalPrice(state.items);
                 state.totalQuantity = getTotalQuantity(state.items);
             }
+            localStorage.setItem("cartItems", JSON.stringify(state.items));
         },
         removeFromCart(state, action: PayloadAction<PizzaItemCart>) {
             state.items = state.items.filter(el => el.id !== action.payload.id);
             state.totalPrice = getTotalPrice(state.items);
             state.totalQuantity = getTotalQuantity(state.items);
+            localStorage.setItem("cartItems", JSON.stringify(state.items));
         },
 
         increaseItem(state, action) {
@@ -57,6 +61,7 @@ const cartSlice = createSlice({
                 }
                 state.totalPrice = getTotalPrice(state.items);
                 state.totalQuantity = getTotalQuantity(state.items);
+                localStorage.setItem("cartItems", JSON.stringify(state.items));
             } else {
                 return
             }
@@ -72,6 +77,7 @@ const cartSlice = createSlice({
                 }
                 state.totalPrice = getTotalPrice(state.items);
                 state.totalQuantity = getTotalQuantity(state.items);
+                localStorage.setItem("cartItems", JSON.stringify(state.items));
             } else {
                 return
             }
@@ -81,11 +87,16 @@ const cartSlice = createSlice({
             state.items = [];
             state.totalPrice = getTotalPrice(state.items);
             state.totalQuantity = getTotalQuantity(state.items);
+            localStorage.setItem("cartItems", JSON.stringify(state.items));
+        },
+        getTotals(state) {
+            state.totalPrice = getTotalPrice(state.items);
+            state.totalQuantity = getTotalQuantity(state.items);
         }
 
 
     }
 })
 
-export const {addToCart, removeFromCart, increaseItem, decreaseItem, cleanOut} = cartSlice.actions;
+export const {addToCart, removeFromCart, increaseItem, decreaseItem, cleanOut, getTotals} = cartSlice.actions;
 export default cartSlice.reducer;

@@ -4,7 +4,7 @@ import Button from "../UI/Button/Button";
 import {ReactComponent as PlusIcon} from "./img/plus-icon.svg";
 
 
-import {useAppDispatch} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {addToCart} from "../../store/slices/cartSlice";
 import cn from "classnames";
 
@@ -16,10 +16,13 @@ interface ItemCardProps {
 
 const ItemCard: FC<ItemCardProps> = ({item}) => {
 
+    const {items} = useAppSelector(state => state.cart);
+    const dispatch = useAppDispatch();
+
     const [dough, setDough] = useState(item.dough[0].value);
     const [size, setSize] = useState(item.size[0].value);
 
-    const dispatch = useAppDispatch();
+    const isExist = items.some((el) => (el.title === item.title) && (el.dough === dough) && (el.size === size));
 
     const onItemAdd = (item: PizzaItem) => {
         dispatch(addToCart({...item, size, dough, quantity: 1,}));
@@ -64,8 +67,8 @@ const ItemCard: FC<ItemCardProps> = ({item}) => {
 
                 <div className={styles.footerWrapper}>
                     <h5>от {item.price} ₽</h5>
-                    <Button onClick={() => onItemAdd(item)} variant={"primary"}>
-                        <PlusIcon/>Добавить
+                    <Button onClick={() => onItemAdd(item)} variant={"primary"} active={isExist}>
+                        {isExist ? 'В корзине' : <><PlusIcon/>Добавить</>}
                     </Button>
                 </div>
 
