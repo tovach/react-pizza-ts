@@ -40,11 +40,11 @@
     color: var(--black);
     &:hover {
         transition: all linear 0.2s;
-        @extend .secondaryAcive
+        @extend .secondaryActive
     }
 }
 
-.secondaryAcive {
+.secondaryActive {
     background: #282828;
     color: var(--white);
 }
