@@ -1,29 +1,29 @@
 import React, {FC, useEffect, useState} from 'react';
-import {useAxios} from "../../hooks/axios";
 
 import styles from './Tabs.module.scss'
 import Button from "../UI/Button/Button";
 import TabsPreloader from "./TabsPreloader";
 import {useAppDispatch} from "../../hooks/redux";
 import {setCategory} from "../../store/slices/goodsSlice";
+import {useGetCategoriesQuery} from "../../store/api/goods.api";
 
 
 const Tabs: FC = () => {
-    const url = '/categories';
-    const {response, error, loading} = useAxios<string[]>(url);
+    const {data, isLoading} = useGetCategoriesQuery()
     const [categories, setCategories] = useState<string[]>();
-    const [current, setcurrent] = useState('');
+    const [current, setCurrent] = useState('');
 
     const dispatch = useAppDispatch();
 
+    const onChoice = (el: string) => {
+        setCurrent(el)
+    }
+
 
     useEffect(() => {
-        setCategories(response)
-    }, [response])
+        setCategories(data)
+    }, [data])
 
-    const onChoice = (el: string) => {
-        setcurrent(el)
-    }
 
     useEffect(() => {
         dispatch(setCategory(current));
@@ -35,7 +35,7 @@ const Tabs: FC = () => {
                     <Button variant={"secondary"} active={'' === current}>Все</Button>
                 </li>
                 {
-                    !loading
+                    !isLoading
                         ?
                         categories?.map(
                             (el, index) =>
